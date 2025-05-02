@@ -1,0 +1,56 @@
+05/02/25 19:56
+
+Problem 1 (5 points):
+Score += 5
+
+Problem 2 (5 points):
+Score += 5
+
+Problem 3 (5 points):
+prob3() failed
+Score += 1
+
+Problem 4 (5 points):
+Score += 5
+
+Problem 5 (5 points):
+Score += 5
+
+Problem 6 (10 points):
+prob6() failed
+	Correct response:
+[[0.5   0.5   0.   ]
+ [0.    1.    0.   ]
+ [0.333 0.333 0.333]]
+	Student response:
+[[0.5   1.    0.   ]
+ [0.    1.    0.   ]
+ [0.5   1.    0.333]]
+ValueError: operands could not be broadcast together with shapes (2,4) (2,) 
+
+Problem 7 (10 points):
+NotImplementedError: Problem 7 Incomplete
+
+Code Quality (5 points):
+Score += 5
+
+Total score: 26/50 = 52.0%
+
+Linter Notes: 
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:13:29: E231 missing whitespace after ','
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:14:32: E231 missing whitespace after ','
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:14:46: E231 missing whitespace after ','
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:22:28: E231 missing whitespace after ','
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:22:38: E231 missing whitespace after ','
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:40:40: E251 unexpected spaces around keyword / parameter equals
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:40:42: E251 unexpected spaces around keyword / parameter equals
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:41:41: E251 unexpected spaces around keyword / parameter equals
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:41:43: E251 unexpected spaces around keyword / parameter equals
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:42:5: F841 local variable 'product' is assigned to but never used
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:76:29: E231 missing whitespace after ','
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:98:26: E251 unexpected spaces around keyword / parameter equals
+/home/gibsonn/Instructor-Materials/KatherineCollier/NumpyIntro/numpy_intro.py:98:28: E251 unexpected spaces around keyword / parameter equals
+
+
+-------------------------------------------------------------------------------
+
