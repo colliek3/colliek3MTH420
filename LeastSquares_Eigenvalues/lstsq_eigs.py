@@ -1,8 +1,8 @@
 # lstsq_eigs.py
 """Volume 1: Least Squares and Computing Eigenvalues.
-<Name>
-<Class>
-<Date>
+<Katherine Collier>
+<MTH420>
+<05/09/2025>
 """
 
 import numpy as np
