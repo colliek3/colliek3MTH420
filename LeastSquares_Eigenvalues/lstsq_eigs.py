@@ -23,7 +23,17 @@ def least_squares(A, b):
     Returns:
         x ((n, ) ndarray): The solution to the normal equations.
     """
-    raise NotImplementedError("Problem 1 Incomplete")
+    # creates qr factorization
+    q, r = la.qr(A, mode='economic')
+
+    # calculates Q^Tb
+    qt = np.transpose(q)
+    b1 = np.dot(qt, b)
+
+    # solve triangular system for x
+    x = la.solve_triangular(r, b1)
+
+    return x
 
 # Problem 2
 def line_fit():
@@ -31,7 +41,29 @@ def line_fit():
     index for the data in housing.npy. Plot both the data points and the least
     squares line.
     """
-    raise NotImplementedError("Problem 2 Incomplete")
+    # define A and b based on housing.npy
+    year, price_index = np.load("housing.npy").T
+
+    A = np.column_stack((np.ones_like(year), year))
+    b = price_index
+
+    # find least squares
+    x = least_squares(A, b)
+
+    intercept, slope = x
+
+    # create scale for axes
+    x_fit = np.linspace(0, 16, 100)
+    y_fit = intercept + slope * x_fit
+
+    # create plots
+    plt.scatter(year, price_index, color='blue', label='Scatter Data Points')
+    plt.plot(x_fit, y_fit, color='red', label='Least Squares')
+    plt.xlabel('Year (from 0)')
+    plt.ylabel('Housing Price index')
+    plt.legend()
+    plt.title('Least Squares Fit and Scatter Points of Housing Price Index')
+    plt.show()
 
 
 # Problem 3
@@ -40,7 +72,35 @@ def polynomial_fit():
     the year to the housing price index for the data in housing.npy. Plot both
     the data points and the least squares polynomials in individual subplots.
     """
-    raise NotImplementedError("Problem 3 Incomplete")
+    from scipy import linalg as la
+
+    # Define A and b
+    year, data_index = np.load("housing.npy").T
+    degrees = [3, 6, 9, 12]
+    x_fit = np.linspace(0, 16, 200)
+
+    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+
+    # iterate over each subplot in degrees
+    for ax, degree in zip(axes.flatten(), degrees):
+        A = np.vander(year, degree+1, increasing=True)
+
+        # calculate least squares accurately
+        x = la.lstsq(A, data_index)[0]
+
+        # fit axes properly
+        A_fit = np.vander(x_fit, degree+1, increasing=True)
+        y_fit = A_fit @ x
+
+        # create each subplot
+        ax.scatter(year, data_index, color='blue', label='Data')
+        ax.plot(x_fit, y_fit, color='red', label=f'degree {degree}')
+        ax.set_title(f'Polynomial Fit (Degree {degree})')
+        ax.set_xlabel('Year from 0')
+        ax.set_ylabel('Housing Price Index')
+        ax.legend()
+
+    plt.show()
 
 
 def plot_ellipse(a, b, c, d, e):
