@@ -1,8 +1,8 @@
 # drazin.py
 """Volume 1: The Drazin Inverse.
-<Name>
-<Class>
-<Date>
+Katherine Collier
+MTH 420
+16 May 2025
 """
 
 import numpy as np
@@ -50,8 +50,14 @@ def is_drazin(A, Ad, k):
     Returns:
         (bool) True of Ad is the Drazin inverse of A, False otherwise.
     """
-    raise NotImplementedError("Problem 1 Incomplete")
-
+    if np.array_equal(np.matmul(A, Ad), np.matmul(Ad, A)) == False:
+        return False
+    elif np.array_equal(np.matmul(np.linalg.matrix_power(A, k+1), Ad), np.linalg.matrix_power(A, k)) == False:
+        return False
+    elif np.array_equal(np.matmul(np.matmul(Ad, A), Ad), Ad) == False:
+        return False
+    else:
+        return True
 
 # Problem 2
 def drazin_inverse(A, tol=1e-4):
@@ -63,7 +69,22 @@ def drazin_inverse(A, tol=1e-4):
     Returns:
        ((n,n) ndarray) The Drazin inverse of A.
     """
-    raise NotImplementedError("Problem 2 Incomplete")
+    # calculate schur decomps in correct orders
+    f = lambda x: abs(x) > 0
+    g = lambda x: abs(x) <= 0
+    T1, Z1, k1 = la.schur(A, sort=f)
+    T2, Z2, k2 = la.schur(A, sort=g)
+    # change of basis matrix
+    U = np.hstack((Z1[:, :k1], Z2[:, k1:]))
+    U_inv = la.pinv(U)
+    V = np.matmul(np.matmul(U_inv, A), U)
+    Z = np.zeros_like(A)
+
+    if k1 != 0:
+        M_inv = la.pinv(V[:k1, :k1])
+        Z[:k1, :k1] = M_inv
+
+    return np.matmul(np.matmul(U, Z), U_inv)
 
 
 # Problem 3
@@ -77,8 +98,19 @@ def effective_resistance(A):
         ((n,n) ndarray) The matrix where the ijth entry is the effective
         resistance from node i to node j.
     """
-    raise NotImplementedError("Problem 3 Incomplete")
+    n = len(A)
+    degree_matrix = np.diag(np.matmul(A, np.ones(n)))
+    # easier to calculate on hand- hard to implement matrix methods for some reason
+    laplacian = degree_matrix - A
+    laplacian_inv = la.pinv(laplacian)
 
+    resistance_matrix = np.zeros_like(A)
+
+    for i in range(n):
+        for j in range(n):
+            resistance_matrix[i, j] = laplacian_inv[i, i] + laplacian_inv[j, j] - 2 * laplacian_inv[i, j]
+
+    return resistance_matrix
 
 # Problems 4 and 5
 class LinkPredictor:
