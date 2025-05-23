@@ -78,3 +78,39 @@ Linter Notes:
 
 -------------------------------------------------------------------------------
 
+05/23/25 12:37
+
+Problem 2 (5 points):
+Score += 5
+
+Problem 3 (5 points):
+close
+Score += 4
+
+Problem 4 (10 points):
+TypeError: slice indices must be integers or None or have an __index__ method
+
+Problem 5 (5 points):
+ValueError: list.remove(x): x not in list
+
+Problem 6 (5 points):
+pig_latin('college') failed
+	Correct response: 'ollegecay'
+	Student response: 'collegeay'
+pig_latin('university') failed
+	Correct response: 'universityhay'
+	Student response: 'universityay'
+Score += 0
+
+Problem 7 (10 points):
+Score += 10
+
+Problem 8 (10 points):
+ZeroDivisionError: division by zero
+
+Total score: 19/50 = 38.0%
+
+Linter Notes: None
+
+-------------------------------------------------------------------------------
+
