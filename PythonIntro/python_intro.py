@@ -42,7 +42,8 @@ def first_half(my_string):
         'ipy'
     """
     length = len(my_string)
-    midpoint = length / 2
+    # floor division, use +1 to include middle
+    midpoint = (length + 1) // 2
     return my_string[:midpoint]
 
     # raise NotImplementedError("Problem 4 Incomplete")
@@ -80,7 +81,7 @@ def list_ops():
 
     my_list.append("eagle")
     my_list[2] = "fox"
-    my_list.remove(1)
+    my_list.pop(1)
     # For sorting, we were told that sort existed so I hope I'm allowed to use it
     # I did some outside research for this- checking in in class
     my_list.sort(reverse=True)
@@ -107,14 +108,10 @@ def pig_latin(word):
         >>> pig_latin("banana")
         'ananabay'
     """
-    # Please let me use or and not do 8 elif statements
-    if word[0] == "a" or "e" or "i" or "o" or "u" or "y":
-        word = word + "ay"
+    if word[0] in "aeiouy":
+        return word + "hay"
     else:
-        word = word + word[0] + "ay"
-        word.remove(0)
-
-    return word
+        return word[1:] + word[0] + "ay"
 
 #    raise NotImplementedError("Problem 6 Incomplete")
 
@@ -141,9 +138,9 @@ def alt_harmonic(n):
     harmonic series, which approximates ln(2).
     """
     my_list = []
-    for i in range(0, n):
+    for i in range(1, n + 1):
         val = (-1) ** (i + 1) / i
         my_list.append(val)
 
-    sum(my_list)
-    raise NotImplementedError("Problem 8 Incomplete")
+    return sum(my_list)
+    # raise NotImplementedError("Problem 8 Incomplete")
