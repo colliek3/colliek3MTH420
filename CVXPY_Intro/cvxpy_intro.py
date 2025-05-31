@@ -1,13 +1,16 @@
 # cvxpy_intro.py
 """Volume 2: Intro to CVXPY.
-<Name>
-<Class>
-<Date>
+Katherine Collier
+MTH 420
+5/30/2025
 """
 
 import numpy as np
 import cvxpy as cp
 
+""" All of these problems seem like they suffer from some level
+    of rounding error as the calculator uses the Floating Point values.
+    """
 def prob1():
     """Solve the following convex optimization problem:
 
@@ -23,7 +26,26 @@ def prob1():
         The optimizer x (ndarray)
         The optimal value (float)
     """
-    raise NotImplementedError("Problem 1 Incomplete")
+    
+    x = cp.Variable(3, nonneg = True)
+    c = np.array([2, 1, 3])
+    objective = cp.Minimize(c.T @ x)
+
+    # constraints
+    A = np.array([1, 2, 0])
+    B = np.array([0, 1, -4])
+    C = np.array([2, 1, 3])
+    D = np.eye(3)
+
+    constraints = [A @ x <= 3, B @ x <=1, C @ x >= 12, D @ x >= 0]
+
+    problem = cp.Problem(objective, constraints)
+    optimal = problem.solve()
+
+    return x.value, optimal
+
+
+# raise NotImplementedError("Problem 1 Incomplete")
 
 
 # Problem 2
@@ -41,7 +63,18 @@ def l1Min(A, b):
         The optimizer x (ndarray)
         The optimal value (float)
     """
-    raise NotImplementedError("Problem 2 Incomplete")
+    # This wasn't working for me with the example given
+    n  = A.shape[1]
+    x = cp.Variable(n)
+
+    objective = cp.Minimize(cp.norm(x, 1))
+    constraints = [A @ x == b]
+
+    problem = cp.Problem(objective, constraints)
+    optimal = problem.solve()
+
+    return x.value, optimal
+    # raise NotImplementedError("Problem 2 Incomplete")
 
 
 # Problem 3
@@ -53,7 +86,23 @@ def prob3():
         The optimizer x (ndarray)
         The optimal value (float)
     """
-    raise NotImplementedError("Problem 3 Incomplete")
+    supply = np.array([7, 2, 4])
+    demand = np.array([5, 8])
+    # 2 by 3 array represents the cost between edges
+    costs =  np.array([[4, 7],[6, 8],[8, 9]])
+
+    # create the variable as a matrix- i, j th element represents
+    # the optimized number of pianos between two edges
+    x = cp.Variable((3, 2), nonneg = True)
+
+    objective = cp.Minimize(cp.sum(cp.multiply(costs, x)))
+    constraints = [cp.sum(x, axis = 1) <= supply, cp.sum(x, axis = 0) == demand]
+
+    problem = cp.Problem(objective, constraints)
+    optimal = problem.solve()
+
+    return x.value, optimal
+    # raise NotImplementedError("Problem 3 Incomplete")
 
 
 # Problem 4
@@ -66,7 +115,15 @@ def prob4():
         The optimizer x (ndarray)
         The optimal value (float)
     """
-    raise NotImplementedError("Problem 4 Incomplete")
+    x = cp.Variable(3)
+    Q = np.array([[3, 2, 1],[2, 4, 2],[1, 2, 3]]) * 0.5
+    r = np.array([3, 0, 1])
+
+    problem = cp.Problem(cp.Minimize(cp.quad_form(x, Q) + r.T @ x))
+    optimal = problem.solve()
+
+    return x.value, optimal
+    # raise NotImplementedError("Problem 4 Incomplete")
 
 
 # Problem 5
@@ -83,7 +140,18 @@ def prob5(A, b):
         The optimizer x (ndarray)
         The optimal value (float)
     """
-    raise NotImplementedError("Problem 5 Incomplete")
+    n = A.shape[1]
+    x = cp.Variable(n, nonneg = True)
+
+    objective = cp.Minimize(cp.norm(A @ x - b, 2))
+    # leq allows us to get close to the ans without violating convex rules
+    constraints = [cp.norm(x, 1) <= 1]
+
+    problem = cp.Problem(objective, constraints)
+    optimal = problem.solve()
+
+    return x.value, optimal
+    # raise NotImplementedError("Problem 5 Incomplete")
 
 
 # Problem 6
