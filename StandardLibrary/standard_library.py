@@ -6,7 +6,7 @@ MTH 420
 """
 
 from math import sqrt
-
+import calculator
 
 # Problem 1
 def prob1(L):
@@ -49,16 +49,15 @@ def prob2():
         print("lists are immutable")
 
     test_tuple = ("test", "tuple")
-    new_tuple = test_tuple
-    new_tuple += 1
-    if test_tuple == new_tuple:
+    new_tuple = test_tuple + (1, )
+    if test_tuple is new_tuple:
         print("tuples are mutable")
     else:
         print("tuples are immutable")
 
     test_set = {0, 1, 2, 3}
     new_set = test_set
-    new_set += 1
+    new_set | {1}
     if new_set == test_set:
         print("sets are mutable")
     else:
@@ -79,9 +78,8 @@ def hypot(a, b):
     Returns:
         The length of the triangle's hypotenuse.
     """
-    import calculator
-
     return math.sqrt(calculator.sum(calculator.product(a, a), calculator.product(b, b))) 
+    # my calculator module is in github
     # raise NotImplementedError("Problem 3 Incomplete")
 
 
@@ -95,13 +93,9 @@ def power_set(A):
     Returns:
         (list(sets)): The power set of A as a list of sets.
     """
-    from itertools import combinations
-
-    my_list = list(combinations(A))
-
-    my_list += set(), set(A)
-
-    return my_list
+    return [set(comb) for r in range(len(A) + 1) for comb in combinations(A, r)]
+    # for whatever reason this works in ipython directly but not when I run it from
+    # the file
 
     #raise NotImplementedError("Problem 4 Incomplete")
 
@@ -111,41 +105,4 @@ import time
 # Problem 5: Implement shut the box.
 def shut_the_box(player, timelimit):
     """Play a single game of shut the box."""
-    remaining = list[1, 2, 3, 4, 5, 6, 7, 8, 9]
-    start = time.time()
-
-    while remaining:
-        total_time = time.time - start
-        print("You still need to close: ", remaining)
-        print("It has been: ", total_time, " seconds")
-
-        if total_time > timelimit:
-            print("You Lose :(")
-            break
-
-        if sum(remaining) <= 6:
-            roll = random.randint(1, 6)
-        else:
-            roll = random.randint(1, 6) + random.randint(1, 6)
-
-        if not isvalid(roll, remaining):
-            print("You Lose :(")
-
-            break
-        player_input = input("Enter numbers to flip: ")
-        choices = parse_input(player_input, remaining)
-
-        if not choices or sum(choices) != roll:
-            print("Try again! ")
-            continue
-
-        for number in choices:
-            remaining.remove(number)
-
-        if not remaining:
-            print("You win!")
-            break
-
-
-    time = time.time() - start
-    # raise NotImplementedError("Problem 5 Incomplete")
+    raise NotImplementedError("Problem 5 Incomplete")
