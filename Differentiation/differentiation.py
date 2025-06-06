@@ -1,8 +1,8 @@
 # differentiation.py
 """Volume 1: Differentiation.
-<Name>
-<Class>
-<Date>
+Katherine Collier
+MTH 420
+6 June 2025
 """
 
 import time
@@ -17,34 +17,41 @@ from jax import grad
 # Problem 1
 def prob1():
     """Return the derivative of (sin(x) + 1)^sin(cos(x)) using SymPy."""
-    raise NotImplementedError("Problem 1 Incomplete")
+    x = sy.symbols('x')
+
+    f_x = (sy.sin(x) + 1) ** (sy.sin(sy.cos(x)))
+
+    df_dx = sy.diff(f_x, x)
+
+    df_dx_lambdified = sy.lambdify(x, df_dx, 'numpy')
+
+    return(df_dx_lambdified)    
 
 
 # Problem 2
 def fdq1(f, x, h=1e-5):
     """Calculate the first order forward difference quotient of f at x."""
-    raise NotImplementedError("Problem 2 Incomplete")
+    return (f(x + h) - f(x)) / h
 
 def fdq2(f, x, h=1e-5):
     """Calculate the second order forward difference quotient of f at x."""
-    raise NotImplementedError("Problem 2 Incomplete")
+    return (-3 * f(x) + 4 * f(x + h) - f(x + 2 * h)) / (2 * h)
 
 def bdq1(f, x, h=1e-5):
     """Calculate the first order backward difference quotient of f at x."""
-    raise NotImplementedError("Problem 2 Incomplete")
+    return (f(x) - f(x - h)) / h
 
 def bdq2(f, x, h=1e-5):
     """Calculate the second order backward difference quotient of f at x."""
-    raise NotImplementedError("Problem 2 Incomplete")
+    return (3 * f(x) - 4 * f(x - h) + f(x - 2 * h)) / (2 * h)
 
 def cdq2(f, x, h=1e-5):
     """Calculate the second order centered difference quotient of f at x."""
-    raise NotImplementedError("Problem 2 Incomplete")
+    return (f(x + h) - f(x - h)) / (2 * h)
 
 def cdq4(f, x, h=1e-5):
     """Calculate the fourth order centered difference quotient of f at x."""
-    raise NotImplementedError("Problem 2 Incomplete")
-
+    return (f(x - 2 * h) - 8 * f(x - h) + 8 * f(x + h) - f(x + 2 * h)) / (12 * h)
 
 # Problem 3
 def prob3(x0):
@@ -57,7 +64,39 @@ def prob3(x0):
     Parameters:
         x0 (float): The point where the derivative is being approximated.
     """
-    raise NotImplementedError("Problem 3 Incomplete")
+    # get analytic function and value
+    f_analytic = prob1()
+    exact_val = f_analytic(x0)
+
+    # logspaced values to input into our functions
+    h_values = np.logspace(-8, 0, num=50, base=10.0)
+
+    # get arrays of error for each FD method: FE, BE, and centered
+    error_fdq1 = [abs(exact_val - fdq1(f_analytic, x0, h)) for h in h_values]
+    error_fdq2 = [abs(exact_val - fdq2(f_analytic, x0, h)) for h in h_values]
+    error_bdq1 = [abs(exact_val - bdq1(f_analytic, x0, h)) for h in h_values]
+    error_bdq2 = [abs(exact_val - bdq2(f_analytic, x0, h)) for h in h_values]
+    error_cdq2 = [abs(exact_val - cdq2(f_analytic, x0, h)) for h in h_values]
+    error_cdq4 = [abs(exact_val - cdq4(f_analytic, x0, h)) for h in h_values]
+
+    # plot figure and label
+    plt.figure()
+    plt.loglog(h_values, error_fdq1, label="FDQ1")
+    plt.loglog(h_values, error_fdq2, label="FDQ2")
+    plt.loglog(h_values, error_bdq1, label="BDQ1")
+    plt.loglog(h_values, error_bdq2, label="BDQ2")
+    plt.loglog(h_values, error_cdq2, label="CDQ2")
+    plt.loglog(h_values, error_cdq4, label="CDQ4")
+
+    plt.xlabel("h")
+    plt.ylabel("Absolute Error")
+    plt.title("Finite difference at x0")
+    plt.legend()
+    plt.show()
+
+    # For whatever reason this was not plotting like their plot, which from what I can tell is
+    # correct- I'm probably calculating the analytic value incorrectly which is affecting
+    # the way the error plots. 
 
 
 # Problem 4
@@ -84,7 +123,33 @@ def prob4():
     difference quotient for t=8,9,...,13. Return the values of the speed at
     each t.
     """
-    raise NotImplementedError("Problem 4 Incomplete")
+    data = np.load("plane.npy")
+    t_vals, alpha_deg, beta_deg = data[:, 0], data[:, 1], data[:, 2]
+
+    alpharad, betarad = np.deg2rad(alpha_deg), np.deg2rad(beta_deg)
+
+    # using a = 500 from the above
+    x = 500 * np.tan(betarad) / (np.tan(betarad) - np.tan(alpharad))
+    y = 500 * (np.tan(betarad)*np.tan(alpharad)) / (np.tan(betarad) - np.tan(alpharad))
+
+    # using 64-bit floats for accuracy
+    speed = np.zeros_like(t_vals, dtype=np.float64)
+
+    for i, t in enumerate(t_vals):
+        if i == 0:
+            # h = 1 so no denom
+            dx = x[i + 1] - x[i]
+            dy = y[i + 1] - y[i]
+        elif i == len(t_vals - 1):
+            dx = x[i] - x[i - 1]
+            dy = y[i] - y[i - 1]
+        else:
+            dx = (x[i] - x[i - 1]) / 2
+            dy = (y[i] - y[i - 1]) / 2
+
+        speed[i] = np.sqrt(dx**2 + dy**2)
+
+    return speed
 
 
 # Problem 5
