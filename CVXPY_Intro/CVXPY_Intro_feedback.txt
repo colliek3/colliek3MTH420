@@ -4,3 +4,69 @@ cvxpy_intro.py has not been modified yet
 
 -------------------------------------------------------------------------------
 
+06/06/25 22:43
+
+Problem 1 (10 points):
+Incorrect optimizer
+	Correct response: [0.    1.186 0.047]
+	Student response: [1.616 0.673 2.698]
+Incorrect optimial value
+	Correct response: 1.3255813969728039
+	Student response: 11.99999999925649
+Score += 0
+
+Problem 2 (10 points):
+Score += 10
+
+Problem 3 (10 points):
+Incorrect optimizer
+	Correct response: [5. 2. 0. 2. 0. 4.]
+	Student response: [[5. 2.]
+ [0. 2.]
+ [0. 4.]]
+Score += 4
+
+Problem 4 (10 points):
+Score += 10
+
+Problem 5 (10 points):
+Incorrect optimizer
+	Correct response: [0.036 0.    0.253 0.    0.71 ]
+	Student response: [0.    0.    0.248 0.    0.674]
+Incorrect optimial value
+	Correct response: 2.4293681104243543
+	Student response: 2.3860905404692736
+	A =
+[[2.667 1.965 0.904 1.796 1.638]
+ [4.731 3.542 4.762 3.846 0.519]
+ [2.063 1.572 0.768 2.456 4.138]
+ [2.375 4.129 4.467 4.942 1.229]
+ [1.163 0.328 2.477 0.039 4.768]],
+
+	b =
+[0.59  2.713 2.442 0.363 4.821]
+
+Incorrect optimizer
+	Correct response: [0.715 0.    0.    0.    0.204 0.    0.    0.052 0.    0.029]
+	Student response: [0.592 0.    0.    0.    0.    0.    0.    0.    0.    0.217]
+Incorrect optimial value
+	Correct response: 2.0243753481610973
+	Student response: 1.8101506349663627
+	A =
+[[0.457 0.825 4.334 2.414 3.717 3.617 2.018 2.322 0.812 4.797]
+ [2.52  4.777 2.735 4.673 0.666 1.591 2.364 2.067 3.958 0.921]
+ [2.618 1.825 0.361 3.713 1.561 0.565 4.216 4.201 4.263 4.198]
+ [1.453 2.183 3.825 4.161 4.796 0.135 1.75  0.224 3.707 3.814]
+ [4.662 2.046 2.809 2.452 0.105 1.723 4.613 4.652 1.267 2.61 ]],
+
+	b =
+[0.52  0.287 3.012 2.163 3.712]
+
+Score += 0
+
+Total score: 24/50 = 48.0%
+
+Linter Notes: None
+
+-------------------------------------------------------------------------------
+
