@@ -1,8 +1,8 @@
 # matplotlib_intro.py
 """Python Essentials: Intro to Matplotlib.
-<Name>
-<Class>
-<Date>
+Katherine Collier
+MTH 420
+2 May 2025 (Updated 6/9/25)
 """
 
 import numpy as np
@@ -94,25 +94,28 @@ def prob4():
     y3 = 2*np.sin(x)
     y4 = 2*np.sin(2*x)
 
-    ax1 = plt.subplots(221)
-    ax1.plot(x, y1, 'g-')
-    ax1.set_title("sin(x)")
+    #plt.subplots(2, 2)
 
-    ax2 = plt.subplots(222)
-    ax2.plot(x, y2, 'r--')
-    ax2.set_title("sin(2x)")
+    plt.subplot(221)
+    plt.plot(x, y1, 'g-')
+    plt.title("sin(x)")
 
-    ax3 = plt.subplots(223)
-    ax3.plot(x, y3, 'b--')
-    ax3.set_title("2sin(x)")
+    plt.subplot(222)
+    plt.plot(x, y2, 'r--')
+    plt.title("sin(2x)")
 
-    ax4 = plt.subplots(224)
-    ax4.plot(x, y4, 'm:')
-    ax4.set_title("2sin(2x)")
+    plt.subplot(223)
+    plt.plot(x, y3, 'b--')
+    plt.title("2sin(x)")
+
+    plt.subplot(224)
+    plt.plot(x, y4, 'm:')
+    plt.title("2sin(2x)")
 
     plt.axis([0, 2*np.pi, -2, 2])
     plt.suptitle("sin(x) scalings")
 
+    plt.show()
 
 
 # Problem 5
@@ -146,14 +149,14 @@ def prob6():
 
     # heat map
     plt.subplot(121)
-    plt.colormesh(X, Y, Z, cmap="viridis", shading="auto")
+    plt.pcolormesh(X, Y, Z, cmap="viridis", shading="auto")
     plt.colorbar()
     plt.xlim(-2*np.pi, 2*np.pi)
     plt.ylim(-2*np.pi, 2*np.pi)
 
     # contour map
     plt.subplot(122)
-    plt.contour(X, Y, Z, 10, cmap="coolwarm")
+    plt.contour(X, Y, Z, 20, cmap="coolwarm")
     plt.colorbar()
 
     plt.show()
