@@ -41,7 +41,7 @@ def prob3():
     B += np.tril(np.ones((7, 7)) * -1, k = 0)
     product = np.dot(np.dot(A, B), A)
 
-    return B.astype(np.int64)
+    return A.astype(np.int64), B.astype(np.int64)
     # raise NotImplementedError("Problem 3 Incomplete")
 
 
@@ -95,7 +95,7 @@ def prob6(A):
                [ 0.        ,  1.        ,  0.        ],
                [ 0.33333333,  0.33333333,  0.33333333]])
     """
-    row_sums = A.sum(axis = 1)
+    row_sums = A.sum(axis = 1, keepdims=True)
 
     return A / row_sums
     # raise NotImplementedError("Problem 6 Incomplete")
