@@ -7,7 +7,8 @@ MTH 420
 
 from math import sqrt
 import calculator
-
+from itertools import chain, combinations
+  
 # Problem 1
 def prob1(L):
     """Return the minimum, maximum, and average of the entries of L
@@ -78,7 +79,7 @@ def hypot(a, b):
     Returns:
         The length of the triangle's hypotenuse.
     """
-    return math.sqrt(calculator.sum(calculator.product(a, a), calculator.product(b, b))) 
+    return sqrt(calculator.sum(calculator.product(a, a), calculator.product(b, b))) 
     # my calculator module is in github
     # raise NotImplementedError("Problem 3 Incomplete")
 
