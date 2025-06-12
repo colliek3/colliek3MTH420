@@ -58,3 +58,49 @@ Linter Notes: None
 
 -------------------------------------------------------------------------------
 
+06/12/25 21:28
+
+Problem 1 (15 points):
+Score += 15
+
+Problem 2 (15 points):
+Score += 15
+
+Problem 3 (10 points):
+NameError: name 'math' is not defined
+
+Problem 4 (10 points):
+NameError: name 'combinations' is not defined
+
+Total score: 30/50 = 60.0%
+
+Linter Notes: None
+
+
+Comments:
+	need to import itertools
+
+-------------------------------------------------------------------------------
+
+06/12/25 21:38
+
+Problem 1 (15 points):
+Score += 15
+
+Problem 2 (15 points):
+Score += 15
+
+Problem 3 (10 points):
+Score += 10
+
+Problem 4 (10 points):
+Score += 10
+
+Total score: 50/50 = 100.0%
+
+Excellent!
+
+Linter Notes: None
+
+-------------------------------------------------------------------------------
+
