@@ -22,3 +22,29 @@ Linter Notes: None
 
 -------------------------------------------------------------------------------
 
+06/13/25 14:21
+
+Problem 1 (10 points):
+Score += 10
+
+Problem 2 (10 points):
+Score += 10
+
+Problem 3 (10 points):
+should be [-2,6]
+Score += 7
+
+Problem 4 (10 points):
+Score += 10
+
+Problem 6 (10 points):
+Score += 10
+
+Total score: 47/50 = 94.0%
+
+Great job!
+
+Linter Notes: None
+
+-------------------------------------------------------------------------------
+
